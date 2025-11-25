@@ -19,7 +19,7 @@ FairFree helps individuals, households, and organizations track item expiration 
 | Component | Repository |
 |----------|------------|
 | **Frontend (React)** | https://github.com/badripaudel77/FairFree_Front |
-| **Backend (Spring Boot)** | *(You are here)* |
+| **Backend (Spring Boot)** | https://github.com/badripaudel77/FairFree_Back |
 
 ---
 
