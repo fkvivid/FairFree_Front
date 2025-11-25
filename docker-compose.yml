@@ -1,0 +1,15 @@
+
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: fair-free-front
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      HOST: "0.0.0.0"

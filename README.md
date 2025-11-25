@@ -1,68 +1,73 @@
-# 🎡 FairFree – Backend Service  
-Backend API for the FairFree community donation and waste-reduction platform.
+# React + TypeScript + Vite
 
-FairFree helps individuals, households, and organizations track item expiration dates, reduce waste, and donate items to community members in need. This backend provides secure authentication, business logic, notifications, and persistent data management for all system features.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## 👥 Team Members
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- **Nguyen Khanh, Tran** – Scrum Master, Tech Lead, DevOps  
-- **Badri, Paudel** – Project Owner, Backend Developer  
-- **Dawit, Fsaha Welegebriel** – SecOps, Backend Developer  
-- **Temuujin, Bat Amgalan** – Front-end Developer, CI/CD Owner  
+## React Compiler
 
----
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## 🔗 Related Repositories
+## Expanding the ESLint configuration
 
-| Component | Repository |
-|----------|------------|
-| **Frontend (React)** | https://github.com/badripaudel77/FairFree_Front |
-| **Backend (Spring Boot)** | https://github.com/badripaudel77/FairFree_Back |
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
----
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## 🧩 Features (Backend)
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-- 🧾 **User & Role Management** (Auth0 integrated)  
-- 🍎 **Item Tracking** (create, update, expiration management)  
-- 🎁 **Donation & Claim System**  
-- 🔔 **Notification Engine** for expiring items  
-- 📊 **Dashboard & Analytics APIs**  
-- 🔐 **Secure JWT-based authentication**  
-- ☁️ **Cloud-ready architecture (AWS)**  
-
----
-
-## 🧰 Tech Stack
-
-### **Backend**
-- Java **24.0.1**  
-- Spring Boot  
-- Maven  
-- Auth0 Authentication  
-- Spring Security  
-- RESTful API
-
-### **Infrastructure**
-- AWS Elastic Beanstalk  
-- AWS S3  
-- Docker  
-- GitHub Actions (CI/CD)
-
-### **Database**
-- AWS RDS (PostgreSQL or MySQL)
-
-
----
-
-## 🚀 Deployment (AWS Elastic Beanstalk)
-- Application is containerized using Docker
-- GitHub Actions builds & deploys automatically
-- Supports rolling updates and zero-downtime releases
-
-### Run project
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-docker compose up --build
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```

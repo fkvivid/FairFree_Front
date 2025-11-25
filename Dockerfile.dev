@@ -1,0 +1,23 @@
+# --- Base image ---
+FROM node:24-alpine
+
+# --- Working directory inside container ---
+WORKDIR /app
+
+# --- Install dependencies first (cache layer) ---
+COPY package*.json ./
+RUN npm install
+
+# --- Copy project files ---
+COPY . .
+
+# --- Expose Vite’s dev port ---
+EXPOSE 5173
+
+# --- Enable polling for HMR ---
+ENV CHOKIDAR_USEPOLLING=true
+ENV HOST=0.0.0.0
+
+# --- Run Vite dev server ---
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
