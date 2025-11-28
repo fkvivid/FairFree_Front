@@ -1,13 +1,22 @@
 import { Route, Routes } from "react-router";
 import { HomePage } from "./pages/HomePage";
+import { ExplorePage } from "./pages/ExplorePage";
+import { InventoryPage } from "./pages/InventoryPage";
 import { LoginPage } from "./pages/LoginPage";
+import { NotificationPage } from "./pages/NotificationPage";
+import { ProfilePage } from "./pages/ProfilePage";
+import { MainLayout } from "./layout/MainLayout";
 
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/signin" element={<LoginPage />} />
-            <Route path="/callback" element={<HomePage />} />
+            <Route index path="/" element={<MainLayout children={<HomePage />} />} />
+            <Route path="/explore" element={<MainLayout children={<ExplorePage />} />} />
+            <Route path="/inventory" element={<MainLayout children={<InventoryPage />} />} />
+            <Route path="/notifications" element={<MainLayout children={<NotificationPage />} />} />
+            <Route path="/profile" element={<MainLayout children={<ProfilePage />} />} />
+            {/* auth */}
+            <Route path="/signin" element={<MainLayout children={<LoginPage />} />} />
         </Routes>
     );
 }
