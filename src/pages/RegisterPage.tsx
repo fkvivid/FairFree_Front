@@ -1,19 +1,44 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { NavLink } from "react-router";
+import { AuthService } from "../services/AuthService";
+import { useNavigate } from "react-router";
+
+type RegisterType = {
+    email?: string;
+    fullName?: string;
+    password?: string;
+};
 
 export function RegisterPage() {
-    const onSubmit = (values: any) => {
-        console.log(values);
+    const navigate = useNavigate();
+
+    const onSubmit = async (values: RegisterType) => {
+        try {
+            const response = await AuthService.register(values);
+            if (response.status === 201) {
+                message.success("Successfully registered!");
+                navigate("/signin");
+            }
+        } catch (error: any) {
+            message.error(error?.response?.data?.message || error.toString());
+            console.log("ERROR:", error);
+        }
     };
     return (
         <div className="flex flex-col h-full items-center p-8">
-            <div className="my-30 font-bold text-3xl"> FairFree </div>
+            <div className="my-20 font-bold text-3xl"> FairFree </div>
             <div className="flex h-full flex-col w-full items-center gap-3">
                 <h3 className="font-bold">Create an account</h3>
                 <p>Enter your email to sign up for this app </p>
                 <Form className="w-full " onFinish={onSubmit}>
-                    <Form.Item name="username" rules={[{ required: true, message: "Please input your username!" }]}>
-                        <Input placeholder="email@domain.com" />
+                    <Form.Item name="email" rules={[{ required: true, message: "Please input your email!" }]}>
+                        <Input placeholder="Email@domain.com" />
+                    </Form.Item>
+                    <Form.Item name="fullName" rules={[{ required: true, message: "Please input your name!" }]}>
+                        <Input placeholder="Full Name" />
+                    </Form.Item>
+                    <Form.Item name="password" rules={[{ required: true, message: "Please input your password!" }]}>
+                        <Input placeholder="Password" type={"password"} />
                     </Form.Item>
                     <Form.Item label={null}>
                         <Button type="primary" className="w-full" htmlType="submit">

@@ -1,17 +1,44 @@
+import { Avatar, Button, Divider } from "antd";
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 
 export function ProfilePage() {
-    const [user, setUser] = useState<any>(null);
+    const navigate = useNavigate();
+    const [user, _] = useState(() => {
+        const stored = localStorage.getItem("user");
+        return stored ? JSON.parse(stored) : null;
+    });
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
+        if (!user) {
+            navigate("/signin");
         }
-    }, []);
+    }, [user, navigate]);
 
-    if (!user) return <Navigate to="/signin" replace />;
+    return (
+        <div className="flex flex-col h-screen p-8 justify-between items-center">
+            <div className="flex flex-col w-full items-center gap-5">
+                <h3 className="font-bold text-xl">Profile</h3>
+                <Divider />
 
-    return <div>ProfilePage</div>;
+                <Avatar size={64} style={{ backgroundColor: "#87d068" }}>
+                    {user?.fullName?.charAt(0)}
+                </Avatar>
+                <div className="font-bold">{user?.fullName}</div>
+                <div className="text-gray-500">{user?.email}</div>
+            </div>
+
+            <Button
+                onClick={() => {
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("auth_token");
+                    window.location.reload();
+                }}
+                type="primary"
+                className="w-full mb-20"
+            >
+                Sign out
+            </Button>
+        </div>
+    );
 }
