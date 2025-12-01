@@ -27,7 +27,6 @@ export const MainFooter: React.FC = () => {
                 right: 0,
                 height: "70px",
                 borderTop: "1px solid #eee",
-                background: "#fff",
                 display: "flex",
                 justifyContent: "space-around",
                 alignItems: "center",

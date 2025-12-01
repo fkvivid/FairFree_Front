@@ -1,24 +1,23 @@
-import { Button, Divider, Form, Input, message } from "antd";
-import { NavLink, useNavigate } from "react-router";
+import { Button, Form, Input, message } from "antd";
+import { NavLink } from "react-router";
 import { AuthService } from "../services/AuthService";
+import { useNavigate } from "react-router";
 
-type LoginType = {
+type RegisterType = {
     email?: string;
     fullName?: string;
     password?: string;
 };
 
-export function LoginPage() {
+export function RegisterPage() {
     const navigate = useNavigate();
 
-    const onSubmit = async (values: LoginType) => {
+    const onSubmit = async (values: RegisterType) => {
         try {
-            const response = await AuthService.login(values);
-            if (response.status === 200) {
-                message.success("Successfully logged in!");
-                localStorage.setItem("auth_token", response.data.token);
-                localStorage.setItem("user", JSON.stringify(response.data));
-                navigate("/profile");
+            const response = await AuthService.register(values);
+            if (response.status === 201) {
+                message.success("Successfully registered!");
+                navigate("/signin");
             }
         } catch (error: any) {
             message.error(error?.response?.data?.message || error.toString());
@@ -28,14 +27,18 @@ export function LoginPage() {
     return (
         <div className="flex flex-col h-full items-center p-8">
             <div className="my-20 font-bold text-3xl"> FairFree </div>
-            <div className="flex flex-col w-full items-center gap-3">
-                <h3 className="font-bold">Login to account</h3>
+            <div className="flex h-full flex-col w-full items-center gap-3">
+                <h3 className="font-bold">Create an account</h3>
+                <p>Enter your email to sign up for this app </p>
                 <Form className="w-full " onFinish={onSubmit}>
                     <Form.Item name="email" rules={[{ required: true, message: "Please input your email!" }]}>
                         <Input placeholder="Email@domain.com" />
                     </Form.Item>
+                    <Form.Item name="fullName" rules={[{ required: true, message: "Please input your name!" }]}>
+                        <Input placeholder="Full Name" />
+                    </Form.Item>
                     <Form.Item name="password" rules={[{ required: true, message: "Please input your password!" }]}>
-                        <Input type={"password"} placeholder="Password" />
+                        <Input placeholder="Password" type={"password"} />
                     </Form.Item>
                     <Form.Item label={null}>
                         <Button type="primary" className="w-full" htmlType="submit">
@@ -43,8 +46,9 @@ export function LoginPage() {
                         </Button>
                     </Form.Item>
                 </Form>
-                <Divider />
-                <NavLink to="/signup">or Sign up</NavLink>
+                <span className="text-sm text-center text-gray-500">
+                    By clicking continue, you agree to our <NavLink to="#">Terms of Service</NavLink> and <NavLink to="#">Privacy Policy </NavLink>
+                </span>
             </div>
         </div>
     );
