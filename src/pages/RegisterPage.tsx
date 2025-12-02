@@ -2,6 +2,7 @@ import { Button, Form, Input, message } from "antd";
 import { NavLink } from "react-router";
 import { AuthService } from "../services/AuthService";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 type RegisterType = {
     email?: string;
@@ -11,9 +12,12 @@ type RegisterType = {
 
 export function RegisterPage() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState<boolean>(false);
 
     const onSubmit = async (values: RegisterType) => {
         try {
+            if (loading) return;
+            setLoading(true);
             const response = await AuthService.register(values);
             if (response.status === 201) {
                 message.success("Successfully registered!");
@@ -22,6 +26,8 @@ export function RegisterPage() {
         } catch (error: any) {
             message.error(error?.response?.data?.message || error.toString());
             console.log("ERROR:", error);
+        } finally {
+            setLoading(false);
         }
     };
     return (
@@ -41,7 +47,7 @@ export function RegisterPage() {
                         <Input placeholder="Password" type={"password"} />
                     </Form.Item>
                     <Form.Item label={null}>
-                        <Button type="primary" className="w-full" htmlType="submit">
+                        <Button loading={loading} type="primary" className="w-full" htmlType="submit">
                             Continue
                         </Button>
                     </Form.Item>

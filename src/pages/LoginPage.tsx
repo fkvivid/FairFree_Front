@@ -1,6 +1,7 @@
 import { Button, Divider, Form, Input, message } from "antd";
 import { NavLink, useNavigate } from "react-router";
 import { AuthService } from "../services/AuthService";
+import { useState } from "react";
 
 type LoginType = {
     email?: string;
@@ -10,9 +11,12 @@ type LoginType = {
 
 export function LoginPage() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState<boolean>(false);
 
     const onSubmit = async (values: LoginType) => {
         try {
+            if (loading) return;
+            setLoading(true);
             const response = await AuthService.login(values);
             if (response.status === 200) {
                 message.success("Successfully logged in!");
@@ -23,6 +27,8 @@ export function LoginPage() {
         } catch (error: any) {
             message.error(error?.response?.data?.message || error.toString());
             console.log("ERROR:", error);
+        } finally {
+            setLoading(false);
         }
     };
     return (
@@ -38,7 +44,7 @@ export function LoginPage() {
                         <Input type={"password"} placeholder="Password" />
                     </Form.Item>
                     <Form.Item label={null}>
-                        <Button type="primary" className="w-full" htmlType="submit">
+                        <Button loading={loading} type="primary" className="w-full" htmlType="submit">
                             Continue
                         </Button>
                     </Form.Item>
