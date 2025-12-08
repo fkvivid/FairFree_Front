@@ -2,7 +2,8 @@ import axios from "axios";
 
 const service = axios.create({
     // baseURL: "http://localhost:8080",
-    baseURL: "https://testapi.xcodestest.net",
+    // baseURL: import.meta.env.VITE_API_BASE_URL,
+    baseURL: import.meta.env.DEV ? "http://localhost:8080" : "https://testapi.xcodestest.net",
     timeout: 60000,
     maxBodyLength: Infinity,
 });
