@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import { InventoryService } from "../services/InventoryService";
-import { Button, Card, Alert, Row, Col, Image, Descriptions, Tag, Space, Typography, Divider } from "antd";
+import { Card, Alert, Row, Col, Image, Descriptions, Tag, Space, Typography, Divider } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
@@ -41,7 +41,6 @@ export const ProductShowPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [item, setItem] = useState<Item | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (!id) return;
@@ -141,7 +140,6 @@ export const ProductShowPage: React.FC = () => {
                             </Descriptions.Item>
                             <Descriptions.Item label="Claims">{item.claims ? item.claims.length : 0}</Descriptions.Item>
                         </Descriptions>
-
                     </Col>
                 </Row>
             </Card>
