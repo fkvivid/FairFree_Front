@@ -9,6 +9,8 @@ import { MainLayout } from "./layout/MainLayout";
 import { ConfigProvider } from "antd";
 import { RegisterPage } from "./pages/RegisterPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ProductFormPage } from "./pages/ProductFormPage";
+import { ProductShowPage } from "./pages/ProductShowPage";
 
 function App() {
     return (
@@ -38,6 +40,8 @@ function App() {
                 <Route path="/explore" element={<ProtectedRoute element={<MainLayout children={<ExplorePage />} />} />} />
                 <Route path="/inventory" element={<ProtectedRoute element={<MainLayout children={<InventoryPage />} />} />} />
                 <Route path="/notifications" element={<ProtectedRoute element={<MainLayout children={<NotificationPage />} />} />} />
+                <Route path="/inventory/new" element={<ProtectedRoute element={<MainLayout children={<ProductFormPage/>} />} />} />
+                <Route path="/inventory/:id" element={<ProtectedRoute element={<MainLayout children={<ProductShowPage />} />} />} />
             </Routes>
         </ConfigProvider>
     );

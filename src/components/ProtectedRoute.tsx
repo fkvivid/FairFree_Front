@@ -3,7 +3,7 @@ import { Navigate } from "react-router";
 import type { ReactNode } from "react";
 
 interface ProtectedRouteProps {
-    element: ReactNode;
+    element?: ReactNode;
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {

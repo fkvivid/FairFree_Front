@@ -30,6 +30,7 @@ export const MainFooter: React.FC = () => {
                 display: "flex",
                 justifyContent: "space-around",
                 alignItems: "center",
+                backgroundColor: "white",
                 zIndex: 1000,
             }}
         >
@@ -39,7 +40,7 @@ export const MainFooter: React.FC = () => {
                         key={item.to}
                         to={item.to}
                         style={{
-                            color: location.pathname === item.to ? "#000" : "#888",
+                            color: location.pathname.startsWith(item.to) ? "#000" : "#888",
                             fontSize: "24px",
                         }}
                     >
