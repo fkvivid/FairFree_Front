@@ -1,6 +1,5 @@
 import { List, Avatar, Divider, Spin } from "antd";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { NotificationService } from "../services/NotificationService";
 
 interface Notification {
@@ -37,7 +36,6 @@ export function NotificationPage() {
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedType, setSelectedType] = useState<string>("ALL");
-    const navigate = useNavigate();
 
     const handleOnItemSelect = (itemId: number) => {
         // navigate(`/items/${itemId}`);
