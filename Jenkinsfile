@@ -1,6 +1,7 @@
 pipeline {
     agent {
         docker {
+            image 'fkvivid/my-jenkins-java-node:latest'
             label 'docker-node'
         }
     }
