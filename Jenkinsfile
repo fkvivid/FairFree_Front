@@ -2,16 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:24-alpine'
-            label 'node-agent'
-            args '-v /tmp:/tmp'
         }
-    }
-    triggers {
-        cron('H/1 * * * *')           // Run every 1 minute
-    }
-
-    options {
-        timestamps()
     }
 
     stages {
