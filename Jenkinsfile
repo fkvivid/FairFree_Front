@@ -15,16 +15,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: "jenkins"]],      // <--- choose your branch here
-                    userRemoteConfigs: [[url: 'https://github.com/fkvivid/FairFree_Front']]
-                ])
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm ci'
