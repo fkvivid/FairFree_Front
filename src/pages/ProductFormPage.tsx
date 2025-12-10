@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 export function ProductFormPage() {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState<boolean>(false);
+    const [locationLoading, setLocationLoading] = useState<boolean>(false);
     const [imageFiles, setImageFiles] = useState<Map<string, File>>(new Map());
     const navigate = useNavigate();
 
@@ -64,6 +65,8 @@ export function ProductFormPage() {
             return;
         }
 
+        setLocationLoading(true);
+
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
@@ -101,9 +104,11 @@ export function ProductFormPage() {
                             longitude,
                         });
                         message.warning("Unable to auto-detect address components; coordinates were filled.");
-                    });
+                    })
+                    .finally(() => setLocationLoading(false));
             },
             () => {
+                setLocationLoading(false);
                 message.error("Permission denied. Cannot fill location automatically.");
             },
         );
@@ -215,7 +220,9 @@ export function ProductFormPage() {
                     </Form.Item>
 
                     <div className="col-span-1 md:col-span-2 flex items-end mb-4">
-                        <Button onClick={fillLocationAutomatically}>Use my location to fill location</Button>
+                        <Button loading={locationLoading} onClick={fillLocationAutomatically}>
+                            Use my location to fill location
+                        </Button>
                     </div>
                 </div>
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { Input } from "antd";
+import { Input, Spin } from "antd";
 
 export function ExplorePage() {
     const [position, setPosition] = useState<[number, number] | null>(null);
@@ -23,7 +23,7 @@ export function ExplorePage() {
         );
     }, []);
 
-    if (!position) return <div>Loading map...</div>;
+    if (!position) return <div className="flex w-full h-full items-center justify-center"><Spin /></div>;
 
     return (
         <div className="flex h-full flex-col gap-3 pt-8">
