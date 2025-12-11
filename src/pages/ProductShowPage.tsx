@@ -1,7 +1,7 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { InventoryService } from "../services/InventoryService";
-import { Card, Alert, Row, Col, Image, Descriptions, Tag, Space, Typography, Divider, Button, Modal, List } from "antd";
+import { Card, Alert, Row, Col, Image, Descriptions, Tag, Space, Typography, Divider, Button, Modal } from "antd";
 import { ArrowLeftOutlined, InfoCircleOutlined, CloseCircleFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 
@@ -30,7 +30,7 @@ type Item = {
 export const ProductShowPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [item, setItem] = useState<Item | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [_, setLoading] = useState<boolean>(false);
 
   const [error, setError] = useState<string>("");
   const [showErrorDetails, setShowErrorDetails] = useState(false);
@@ -57,6 +57,7 @@ export const ProductShowPage: React.FC = () => {
 
   useEffect(() => {
     fetchItem();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   if (!item)

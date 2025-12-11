@@ -1,5 +1,5 @@
 import { Avatar, Button, Divider } from "antd";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 export function ProfilePage() {
