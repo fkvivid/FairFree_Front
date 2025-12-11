@@ -1,12 +1,10 @@
 pipeline {
-    agent any
-
-    stages {
-        agent {
-            docker {
-                image 'node:24-alpine'
-            }
+    agent {
+        docker {
+            image 'node:24-alpine'
         }
+    }
+    stages {
         
         stage('Install Dependencies') {
             steps {
