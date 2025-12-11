@@ -33,9 +33,9 @@ export function LoginPage() {
     };
     return (
         <div className="flex flex-col h-full items-center p-8">
-            <div className="my-20 font-bold text-3xl"> FairFree </div>
+            <div className="my-7 font-bold text-3xl"> FairFree </div>
             <div className="flex flex-col w-full items-center gap-3">
-                <h3 className="font-bold">Login to account</h3>
+                <h3 className="font-bold">Login to access the FairFree features</h3>
                 <Form className="w-full " onFinish={onSubmit}>
                     <Form.Item name="email" rules={[{ required: true, message: "Please input your email!" }]}>
                         <Input placeholder="Email@domain.com" />

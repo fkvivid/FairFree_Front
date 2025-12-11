@@ -41,10 +41,9 @@ export function RegisterPage() {
     };
     return (
         <div className="flex flex-col h-full items-center p-8">
-            <div className="my-20 font-bold text-3xl"> FairFree </div>
+            <div className="my-7 font-bold text-2xl"> Register to FairFree </div>
             <div className="flex h-full flex-col w-full items-center gap-3">
-                <h3 className="font-bold">Create an account</h3>
-                <p>Enter your email to sign up for this app </p>
+                <h3 className="font-bold">Create an account for free</h3>
                 <Form className="w-full " onFinish={onSubmit}>
                     <Form.Item name="email" rules={[{ required: true, message: "Please input your email!" }]}>
                         <Input placeholder="Email@domain.com" />
