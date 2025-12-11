@@ -131,6 +131,7 @@ export function NotificationPage() {
                                     px-4 py-1 rounded-full font-medium
                                     transition-colors duration-200
                                     whitespace-nowrap
+                                    cursor-pointer
                                     ${isSelected ? "bg-blue-500 text-white shadow-md" : "bg-gray-200 text-gray-700 hover:bg-gray-300"}
                                 `}>
                                 {labels[type]}

@@ -9,12 +9,6 @@ export function ProfilePage() {
         return stored ? JSON.parse(stored) : null;
     });
 
-    useEffect(() => {
-        if (!user) {
-            navigate("/signin");
-        }
-    }, [user, navigate]);
-
     const handleSignOut = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("auth_token");
@@ -42,42 +36,30 @@ export function ProfilePage() {
                                 {user?.email}
                             </div>
                         </div>
-
-                        <div className="w-full mt-4 grid grid-cols-3 gap-3 text-center">
-                            <div className="bg-gray-50 rounded-md p-3">
-                                <div className="text-lg font-semibold">
-                                    {/* placeholder */}0
+                            <div className="w-full mt-4 grid grid-cols-2 gap-3 text-center">
+                                <div className="bg-gray-50 rounded-md p-3">
+                                    <div className="text-lg font-semibold">
+                                        {/* placeholder */}0
+                                    </div>
+                                    <div className="text-xs text-gray-500">
+                                        Donations
+                                    </div>
                                 </div>
-                                <div className="text-xs text-gray-500">
-                                    Donations
-                                </div>
-                            </div>
-                            <div className="bg-gray-50 rounded-md p-3">
-                                <div className="text-lg font-semibold">
-                                    {/* placeholder */}0
-                                </div>
-                                <div className="text-xs text-gray-500">
-                                    Claims
-                                </div>
-                            </div>
-                            <div className="bg-gray-50 rounded-md p-3">
-                                <div className="text-lg font-semibold">
-                                    {/* placeholder */}0
-                                </div>
-                                <div className="text-xs text-gray-500">
-                                    Friends
+                                <div className="bg-gray-50 rounded-md p-3">
+                                    <div className="text-lg font-semibold">
+                                        {/* placeholder */}0
+                                    </div>
+                                    <div className="text-xs text-gray-500">
+                                        Claims
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
                         <Divider />
 
                         <div className="w-full flex flex-col sm:flex-row gap-3 h-12 ">
                             <Button
                                 onClick={() => navigate("/inventory")}
-                                className="flex-1 "
-                            >
-                                My Items
+                                className="flex-1 ">My Items
                             </Button>
                         </div>
                     </div>

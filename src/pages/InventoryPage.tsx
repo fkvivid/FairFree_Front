@@ -20,7 +20,8 @@ export function InventoryPage() {
     }, []);
 
     return (
-        <div className="flex flex-col justify-between h-full w-full p-8 gap-3">
+        <div className="flex flex-col h-screen w-full p-8 gap-3">
+            {/* Header */}
             <div className="flex flex-col w-full items-center">
                 <div className="flex justify-between w-full items-center">
                     <div></div>
@@ -29,16 +30,13 @@ export function InventoryPage() {
                 </div>
                 <Divider />
             </div>
-            <div className="h-full flex flex-col gap-3">
-                <ul className="flex justify-between text-gray-500">
-                    <li>Items</li>
-                    <li>Description</li>
-                    <li>Quantity</li>
-                </ul>
+
+            {/* Scrollable content */}
+            <div className="flex-1 overflow-auto flex flex-col gap-3 mb-4">
                 {items.map((item, index) => (
                     <div
                         key={index}
-                        className="flex justify-between gap-5 border border-gray-300 rounded p-4"
+                        className="flex justify-between gap-5 border border-gray-300 rounded p-4 cursor-pointer hover:shadow-md transition"
                         onClick={() => navigate(`/inventory/${item.id}`)}
                     >
                         <div>
@@ -59,9 +57,9 @@ export function InventoryPage() {
                     </div>
                 ))}
             </div>
-            <div className="mb-16 flex flex-col w-full">
+            <div className="pb-auto" >
                 <NavLink to="/inventory/new">
-                    <Button type="primary" className="w-full">
+                    <Button type="primary" className="w-full mb-4">
                         Donate
                     </Button>
                 </NavLink>

@@ -22,4 +22,28 @@ export const InventoryService = {
             method: "get",
         });
     },
+    claimItem: (itemId: number): Promise<AxiosResponse<any>> => {
+    return service({
+      url: `/api/v1/items/${itemId}/claim`,
+      method: "post",
+    });
+  },
+  cancelClaim: (claimId: number): Promise<AxiosResponse<any>> => {
+    return service({
+      url: `/api/v1/items/cancel/claims/${claimId}`,
+      method: "post",
+    });
+  },
+  approveClaim: (claimId: number): Promise<AxiosResponse<any>> => {
+    return service({
+      url: `/api/v1/items/approve/claims/${claimId}`,
+      method: "post",
+    });
+  },
+  deleteItem: (itemId: number): Promise<AxiosResponse<any>> => {
+    return service({
+      url: `/api/v1/items/${itemId}`,
+      method: "delete",
+    });
+  }
 };

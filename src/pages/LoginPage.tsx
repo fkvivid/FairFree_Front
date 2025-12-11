@@ -50,7 +50,13 @@ export function LoginPage() {
                     </Form.Item>
                 </Form>
                 <Divider />
-                <NavLink to="/signup">or Sign up</NavLink>
+                 <span className="text-sm text-center text-gray-500">
+                    Don't have an account?{" "}
+                    <NavLink to="/signup" className="text-blue-600 hover:underline">Sign Up</NavLink>
+                </span>
+                <span className="text-sm text-center text-gray-500">
+                    By clicking continue, you agree to our <NavLink to="#">Terms of Service</NavLink> and <NavLink to="#">Privacy Policy </NavLink>
+                </span>
             </div>
         </div>
     );

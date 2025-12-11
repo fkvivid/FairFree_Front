@@ -2,7 +2,7 @@ import { Button, Form, Input, message } from "antd";
 import { NavLink } from "react-router";
 import { AuthService } from "../services/AuthService";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type RegisterType = {
     email?: string;
@@ -13,6 +13,14 @@ type RegisterType = {
 export function RegisterPage() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        const stored = localStorage.getItem("auth_token");
+        if (stored) {
+            navigate("/profile");
+            return;
+        }
+    }, []);
 
     const onSubmit = async (values: RegisterType) => {
         try {
@@ -48,10 +56,14 @@ export function RegisterPage() {
                     </Form.Item>
                     <Form.Item label={null}>
                         <Button loading={loading} type="primary" className="w-full" htmlType="submit">
-                            Continue
+                            Register
                         </Button>
                     </Form.Item>
                 </Form>
+                <span className="text-sm text-center text-gray-500">
+                    Already have an account?{" "}
+                    <NavLink to="/signin" className="text-blue-600 hover:underline">Sign in</NavLink>
+                </span>
                 <span className="text-sm text-center text-gray-500">
                     By clicking continue, you agree to our <NavLink to="#">Terms of Service</NavLink> and <NavLink to="#">Privacy Policy </NavLink>
                 </span>
