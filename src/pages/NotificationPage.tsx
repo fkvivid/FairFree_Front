@@ -1,5 +1,7 @@
-import { List, Avatar, Divider, Spin } from "antd";
+import { List, Avatar, Divider, Spin, Button, Tooltip } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { NotificationService } from "../services/NotificationService";
 
 interface Notification {
@@ -37,9 +39,16 @@ export function NotificationPage() {
     const [loading, setLoading] = useState(true);
     const [selectedType, setSelectedType] = useState<string>("ALL");
 
+    const navigate = useNavigate();
+
     const handleOnItemSelect = (itemId: number) => {
-        // navigate(`/items/${itemId}`);
-        alert(`(TODO) Navigate to item details page with ID: ${itemId}`);
+        // navigate to item details
+        navigate(`/inventory/${itemId}`);
+    };
+
+    const handleOpenIcon = (e: React.MouseEvent, itemId: number) => {
+        e.stopPropagation();
+        handleOnItemSelect(itemId);
     };
 
     useEffect(() => {
@@ -122,6 +131,7 @@ export function NotificationPage() {
                                     px-4 py-1 rounded-full font-medium
                                     transition-colors duration-200
                                     whitespace-nowrap
+                                    cursor-pointer
                                     ${isSelected ? "bg-blue-500 text-white shadow-md" : "bg-gray-200 text-gray-700 hover:bg-gray-300"}
                                 `}>
                                 {labels[type]}
@@ -153,7 +163,18 @@ export function NotificationPage() {
                             onMouseLeave={(e) => {
                                 if (item.isRead) e.currentTarget.style.backgroundColor = "white";
                             }}
->
+                            actions={[
+                                <Tooltip key="open" title="Open details" placement="top">
+                                    <Button
+                                        type="text"
+                                        onClick={(e) => handleOpenIcon(e, item.itemId)}
+                                        icon={<ArrowRightOutlined />}
+                                        aria-label="Open notification details"
+                                        style={{ minWidth: 44, minHeight: 44, padding: 8, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+                                    />
+                                </Tooltip>,
+                            ]}
+                        >
                             <List.Item.Meta
                                 avatar={
                                     <div className="relative">
@@ -166,7 +187,9 @@ export function NotificationPage() {
                                     </div>
                                 }
                                 title={
-                                    <div className="flex justify-between items-start w-full gap-4">
+                                    <div className="flex justify-between items-start w-full gap-4" 
+                                        style={{ marginTop: 10, display: "inline-flex"}}
+                                    >
                                         <span
                                             className={`
                                                 ${textClass}

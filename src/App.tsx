@@ -32,11 +32,11 @@ function App() {
             <Routes>
                 {/* Public routes */}
                 <Route index path="/" element={<MainLayout children={<HomePage />} />} />
-                <Route path="/profile" element={<MainLayout children={<ProfilePage />} />} />
                 <Route path="/signin" element={<MainLayout children={<LoginPage />} />} />
                 <Route path="/signup" element={<MainLayout children={<RegisterPage />} />} />
 
                 {/* Protected routes */}
+                <Route path="/profile" element={<ProtectedRoute element={<MainLayout children={<ProfilePage />} />} />} />
                 <Route path="/explore" element={<ProtectedRoute element={<MainLayout children={<ExplorePage />} />} />} />
                 <Route path="/inventory" element={<ProtectedRoute element={<MainLayout children={<InventoryPage />} />} />} />
                 <Route path="/notifications" element={<ProtectedRoute element={<MainLayout children={<NotificationPage />} />} />} />

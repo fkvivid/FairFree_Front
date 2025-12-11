@@ -6,7 +6,7 @@ export function HomePage() {
             <div className="w-full max-w-4xl">
                 <div className="bg-linear-to-r from-indigo-50 to-white rounded-xl p-6 sm:p-8 shadow-sm">
                     <div className="flex flex-col items-start gap-4">
-                        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">FairFree — Fair. Free. For Everyone.</h1>
+                        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">FairFree — Fair and Free For Everyone.</h1>
                         <p className="text-gray-600 leading-relaxed">
                             A community-driven marketplace for sharing items and services with fairness and trust. Discover listings near you, give
                             away what you no longer need, and connect with neighbors.

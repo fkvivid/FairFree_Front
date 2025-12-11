@@ -44,7 +44,6 @@ export function ProductFormPage() {
             });
 
             const response = await InventoryService.donate(formData);
-            console.log(response);
             if (response.status === 201) {
                 message.success("Successfully created!");
                 form.resetFields();
