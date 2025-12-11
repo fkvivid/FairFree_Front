@@ -20,7 +20,7 @@ export function InventoryPage() {
     }, []);
 
     return (
-        <div className="flex flex-col h-screen w-full p-8 gap-3">
+        <div className="flex flex-col h-screen w-full p-8 gap-3 pb-24">
             {/* Header */}
             <div className="flex flex-col w-full items-center">
                 <div className="flex justify-between w-full items-center">

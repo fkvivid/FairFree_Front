@@ -10,6 +10,12 @@ export const InventoryService = {
             headers: data instanceof FormData ? { "Content-Type": "multipart/form-data" } : {},
         });
     },
+    getAvailableItems: (): Promise<AxiosResponse<any>> => {
+        return service({
+            url: "/api/v1/items/available",
+            method: "get",
+        });
+    },
     getMyItems: (): Promise<AxiosResponse<any>> => {
         return service({
             url: "/api/v1/items/my-items",
@@ -23,27 +29,27 @@ export const InventoryService = {
         });
     },
     claimItem: (itemId: number): Promise<AxiosResponse<any>> => {
-    return service({
-      url: `/api/v1/items/${itemId}/claim`,
-      method: "post",
-    });
-  },
-  cancelClaim: (claimId: number): Promise<AxiosResponse<any>> => {
-    return service({
-      url: `/api/v1/items/cancel/claims/${claimId}`,
-      method: "post",
-    });
-  },
-  approveClaim: (claimId: number): Promise<AxiosResponse<any>> => {
-    return service({
-      url: `/api/v1/items/approve/claims/${claimId}`,
-      method: "post",
-    });
-  },
-  deleteItem: (itemId: number): Promise<AxiosResponse<any>> => {
-    return service({
-      url: `/api/v1/items/${itemId}`,
-      method: "delete",
-    });
-  }
+        return service({
+            url: `/api/v1/items/${itemId}/claim`,
+            method: "post",
+        });
+    },
+    cancelClaim: (claimId: number): Promise<AxiosResponse<any>> => {
+        return service({
+            url: `/api/v1/items/cancel/claims/${claimId}`,
+            method: "post",
+        });
+    },
+    approveClaim: (claimId: number): Promise<AxiosResponse<any>> => {
+        return service({
+            url: `/api/v1/items/approve/claims/${claimId}`,
+            method: "post",
+        });
+    },
+    deleteItem: (itemId: number): Promise<AxiosResponse<any>> => {
+        return service({
+            url: `/api/v1/items/${itemId}`,
+            method: "delete",
+        });
+    },
 };
