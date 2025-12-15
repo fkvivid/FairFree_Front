@@ -24,6 +24,7 @@ export function ExplorePage() {
     const [position, setPosition] = useState<[number, number] | null>(null);
     const [menu, setMenu] = useState<string>("map");
     const [items, setItems] = useState<any[]>([]);
+    const [searchValue, setSearchValue] = useState<string>("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -55,6 +56,22 @@ export function ExplorePage() {
         }
     };
 
+    const searhItems = async (query:string) => {
+        setSearchValue(query);
+        if(!query || query.trim() === "") {
+            getItems();
+            return;
+        }
+        try {
+            const { data } = await InventoryService.serachAndGetItems(query);
+            setItems(data);
+            setSearchValue("");
+        }
+        catch (error) {
+            alert(`Error searching items with input : ${query}. Error Message is ${error}`);
+        }
+    };
+
     if (!position)
         return (
             <div className="flex w-full h-full items-center justify-center">
@@ -68,7 +85,11 @@ export function ExplorePage() {
                 Explore
             </h4>
             <div className="px-4 py-2">
-                <Input.Search placeholder="Search item" className="h-full" />
+                <Input.Search placeholder="Search item, use name, description or location name to find ..." className="h-full"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    onSearch={(value) => searhItems(value)} 
+                />
             </div>
             <div className="px-4 mb-2">
                 <Radio.Group
