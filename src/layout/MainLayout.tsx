@@ -8,9 +8,14 @@ interface MainLayoutProps {
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     return (
-        <div className="h-screen flex flex-col justify-between ">
-            {/* <MainHeader /> */}
-            <div className="h-full ">{children}</div>
+        <div className="h-screen flex flex-col overflow-hidden bg-white">
+            
+            {/* Scrollable content with padding */}
+            <div className="flex-1 overflow-auto px-5 pt-4 pb-24">
+                {children}
+            </div>
+
+            {/* Fixed footer on the page*/}
             <MainFooter />
         </div>
     );

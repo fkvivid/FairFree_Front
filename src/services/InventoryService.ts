@@ -16,6 +16,13 @@ export const InventoryService = {
             method: "get",
         });
     },
+    serachAndGetItems: (query:string): Promise<AxiosResponse<any>> => {
+        return service({
+            url: "/api/v1/items/search",
+            params: {searchText: query},
+            method: "get",
+        });
+    },
     getMyItems: (): Promise<AxiosResponse<any>> => {
         return service({
             url: "/api/v1/items/my-items",

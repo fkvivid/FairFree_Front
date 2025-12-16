@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { Input, Radio, Spin, Image } from "antd";
+import { Input, Radio, Spin, Image, Empty } from "antd";
 import { InventoryService } from "../services/InventoryService";
 import { useNavigate } from "react-router";
 import L from "leaflet";
@@ -24,6 +24,7 @@ export function ExplorePage() {
     const [position, setPosition] = useState<[number, number] | null>(null);
     const [menu, setMenu] = useState<string>("map");
     const [items, setItems] = useState<any[]>([]);
+    const [searchValue, setSearchValue] = useState<string>("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -55,6 +56,23 @@ export function ExplorePage() {
         }
     };
 
+    const searhItems = async (query:string) => {
+        setSearchValue(query);
+        if(!query || query.trim() === "") {
+            getItems();
+            return;
+        }
+        try {
+            const { data } = await InventoryService.serachAndGetItems(query);
+            setItems(data);
+            // setSearchValue("");
+            setMenu("list")
+        }
+        catch (error) {
+            alert(`Error searching items with input : ${query}. Error Message is ${error}`);
+        }
+    };
+
     if (!position)
         return (
             <div className="flex w-full h-full items-center justify-center">
@@ -68,7 +86,11 @@ export function ExplorePage() {
                 Explore
             </h4>
             <div className="px-4 py-2">
-                <Input.Search placeholder="Search item" className="h-full" />
+                <Input.Search placeholder="Search item, use name, description or location name to find ..." className="h-full"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    onSearch={(value) => searhItems(value)} 
+                />
             </div>
             <div className="px-4 mb-2">
                 <Radio.Group
@@ -78,7 +100,7 @@ export function ExplorePage() {
                         { label: "List", value: "list" },
                     ]}
                     onChange={(e) => setMenu(e.target.value)}
-                    defaultValue={menu}
+                    value={menu}
                     optionType="button"
                     buttonStyle="solid"
                 />
@@ -149,8 +171,8 @@ export function ExplorePage() {
                     })}
                 </MapContainer>
             ) : (
-                <div className="flex-1 overflow-auto flex flex-col gap-3 mb-4">
-                    {items.map((item, index) => (
+                <div className="flex-1 overflow-auto pt-4 flex flex-col gap-3 mb-4">
+                    {items.length === 0 ? <Empty /> : items.map((item, index) => (
                         <div
                             key={index}
                             className="flex justify-between gap-5 border border-gray-300 rounded p-4 cursor-pointer hover:shadow-md transition"

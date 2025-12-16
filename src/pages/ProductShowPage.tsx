@@ -370,7 +370,7 @@ export const ProductShowPage: React.FC = () => {
                 <Space direction="vertical" size={8} style={{ width: "100%" }}>
                   {/* Claim button,  */}
                   {!isOwner && item.status !== "DONATED" && !myClaim && (
-                    <Button type="primary" size="middle" onClick={handleClaim} style={{ background: "#13c2c2", borderColor: "#13c2c2" }}>Claim Item</Button>
+                    <Button type="primary" size="middle" onClick={handleClaim} style={{ background: "#13c2c2", borderColor: "#13c2c2" }}>Request for claim item</Button>
                   )}
                   {/* Cancel claim button */}
                   {myClaim && (
