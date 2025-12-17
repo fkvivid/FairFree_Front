@@ -11,10 +11,10 @@ FairFree helps individuals, households, and organizations track item expiration 
 
 ## 👥 Team Members
 
-- **Nguyen Khanh, Tran** – Scrum Master, Tech Lead, DevOps  
-- **Badri, Paudel** – Project Owner, Backend Developer  
-- **Dawit, Fsaha Welegebriel** – SecOps, Backend Developer  
-- **Temuujin, Bat Amgalan** – Front-end Developer, CI/CD Owner  
+- **Nguyen Khanh, Tran** – Scrum Master, Tech Lead
+- **Badri, Paudel** – Project Owner, Backend Developer
+- **Dawit, Fsaha Welegebriel** – GIS Developer, Backend Developer
+- **Temuujin, Bat Amgalan** – Front-end Developer, DevOps  
 
 ---
 
