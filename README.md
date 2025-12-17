@@ -29,7 +29,7 @@ FairFree helps individuals, households, and organizations track item expiration 
 
 ## 🧩 Features (Backend)
 
-- 🧾 **User & Role Management** (Auth0 integrated)  
+- 🧾 **User & Role Management** 
 - 🍎 **Item Tracking** (create, update, expiration management)  
 - 🎁 **Donation & Claim System**  
 - 🔔 **Notification Engine** for expiring items  
@@ -42,7 +42,7 @@ FairFree helps individuals, households, and organizations track item expiration 
 ## 🧰 Tech Stack
 
 ### **Backend**
-- Java **24.0.1**  
+- Java **17**  
 - Spring Boot  
 - Maven  
 - Auth0 Authentication  
@@ -50,7 +50,7 @@ FairFree helps individuals, households, and organizations track item expiration 
 - RESTful API
 
 ### **Infrastructure**
-- AWS Elastic Beanstalk  
+- AWS EC2
 - AWS S3  
 - Docker  
 - GitHub Actions (CI/CD)
@@ -64,5 +64,4 @@ FairFree helps individuals, households, and organizations track item expiration 
 ## 🚀 Deployment (AWS Elastic Beanstalk)
 - Application is containerized using Docker
 - GitHub Actions builds & deploys automatically
-- Supports rolling updates and zero-downtime releases
 
